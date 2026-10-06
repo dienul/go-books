@@ -1,0 +1,19 @@
+{
+  "name": "go-books",
+  "version": "1.0.0",
+  "scripts": {},
+  "type": "module",
+  "dependencies": {
+    "@netlify/database": "^2.0.1",
+    "bcryptjs": "^3.0.3",
+    "drizzle-orm": "^1.0.0-beta.22",
+    "jose": "^6.2.12"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^6.0.2",
+    "@types/node": "^26.6.4",
+    "drizzle-kit": "^1.0.0-beta.22",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}

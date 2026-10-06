@@ -165,3 +165,28 @@ GIN_MODE=release
 5. Deploy ulang dan periksa `/health`.
 
 Gunakan private `DATABASE_URL` untuk aplikasi yang berjalan di Railway. `DATABASE_PUBLIC_URL` hanya diperlukan untuk aplikasi yang berjalan dari komputer lokal.
+
+## Deployment Netlify
+
+Project ini juga dapat berjalan sepenuhnya di Netlify. Endpoint yang sama (path, format request, respons, dan pesan error) disediakan oleh Netlify Functions di `netlify/functions/`, dengan data disimpan di Netlify Database (PostgreSQL terkelola).
+
+- Schema database didefinisikan di `db/schema.ts` (Drizzle ORM) dan mengikuti `migrations/001_create_tables.sql`.
+- Migration berada di `netlify/database/migrations/` dan diterapkan otomatis oleh Netlify setiap deploy. Untuk perubahan schema berikutnya, ubah `db/schema.ts` lalu jalankan `npx drizzle-kit generate --name nama_perubahan`.
+- Koneksi database dikonfigurasi otomatis oleh Netlify; `DATABASE_URL` tidak diperlukan.
+
+Atur environment variables berikut di **Project configuration → Environment variables**:
+
+```env
+JWT_SECRET=string-acak-minimal-32-karakter
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=password-admin-minimal-8-karakter
+```
+
+Akun admin dibuat otomatis saat login pertama jika username tersebut belum tersedia.
+
+Menjalankan secara lokal:
+
+```bash
+npm install
+netlify dev
+```
